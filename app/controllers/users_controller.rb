@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  skip_before_action :authorized, only: [:create]
+  # skip_before_action :authorized, only: [:create]
 
     def index
         users = User.all
@@ -22,8 +22,8 @@ class UsersController < ApplicationController
       end
       
       def update
-        user = User.find_by(id: params[:id])
-        if user.update(user_params)
+        user = User.find_by(username: params[:username])
+        if user.update(username: params[:username], location: params[:location], bio: params[:bio])
         render json: user
         else
         render json: user.errors, status: :unprocessable_entity

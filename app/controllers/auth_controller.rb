@@ -1,9 +1,8 @@
 class AuthController < ApplicationController
-  skip_before_action :authorized, only: [:create]
+  # skip_before_action :authorized, only: [:create]
 
   def create
     user = User.find_by(username: params[:username])
-    puts user.username
     user.authenticate(params[:password]) == true
     if user && user.authenticate(params[:password])
       token = encode_token({user_id: user.id})
@@ -16,15 +15,15 @@ class AuthController < ApplicationController
   def show
     token  = request.headers['Authorization'].split(' ')[1]
     begin
-      decoded_token = JWT.decode token, 'secret', true, { algorithm: 'HS256' }
-      user_id = decoded_token[0]['id']
+      decoded_token = JWT.decode token, 'app_secret', true, { algorithm: 'HS256' }
+      user_id = decoded_token[0]['user_id']
       user = User.find(user_id)
     rescue
       user = nil
     end
 
     if user
-      render json: { id: user.id, username: user.username, token: token }
+      render json: { user: user, token: token }
     else
       render json: { error: 'invalid token' }, status: 401
     end
