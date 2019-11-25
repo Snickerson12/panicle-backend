@@ -4,9 +4,10 @@ Rails.application.routes.draw do
   resources :posts
   resources :groups
   resources :photos
-  resources :users, param: :username, only: [:create, :update]
+  resources :users, param: :username, only: [:create, :update, :show]
     post '/auth', to: 'auth#create'
     get '/auth', to: 'auth#show'
     post '/users/:username', to: 'users#update'
+    get '/user/:username', to: 'users#show'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
