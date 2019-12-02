@@ -23,7 +23,7 @@ class UsersController < ApplicationController
       
       def update
         user = User.find_by(username: params[:username])
-        if user.update(username: params[:username], location: params[:location], bio: params[:bio])
+        if user.update(username: params[:username], email: params[:email], location: params[:location], bio: params[:bio])
         render json: user
         else
         render json: user.errors, status: :unprocessable_entity
@@ -38,7 +38,7 @@ class UsersController < ApplicationController
       private
     
       def user_params
-        params.require(:user).permit(:username, :location, :bio, :password)
+        params.require(:user).permit(:username, :email, :location, :bio, :password)
       end
 
 end

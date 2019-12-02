@@ -1,4 +1,4 @@
 class UserSerializer < ActiveModel::Serializer
-  attributes :id, :username, :location, :bio, :posts, :comments, :user_groups, :groups, :photos
+  attributes :id, :username, :email, :location, :bio, :posts, :comments, :user_groups, :groups, :photos, :pending_user_groups
 
 end
