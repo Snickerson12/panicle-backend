@@ -15,8 +15,8 @@ UserGroup.destroy_all
 
 user = User.create(username: 'laura', password_digest: 'laura', location: 'Chicago', bio: 'bio')
 user2 = User.create(username: 'carla', password_digest: 'carla', location: 'Chicago', bio: 'bio')
-post = Post.create(content: 'post text content', user_id: 1)
+group = Group.create(name: 'test group')
+post = Post.create(content: 'post text content', user_id: 4, group_id: 1)
 comment = Comment.create(user_id: 1, post_id: 1, content: 'this comment says quality post')
 photo = Photo.create(user_id: 1)
-group = Group.create(name: 'test group')
 user_group = UserGroup.create(user_id: 1, group_id: 1)

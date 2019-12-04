@@ -10,4 +10,19 @@ class GroupsController < ApplicationController
         render json: group
     end
 
+    def create
+        group = Group.create(group_params)
+        if group.valid?
+          render json: {group: GroupSerializer.new(group)}, status: :created
+        else
+          render json: { error: 'failed to create group' }, status: :not_acceptable
+        end
+    end
+
+    private
+    
+    def group_params
+      params.require(:group).permit(:name)
+    end
+
 end
